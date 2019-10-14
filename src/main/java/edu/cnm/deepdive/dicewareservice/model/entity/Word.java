@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.dicewareservice.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +15,13 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.NonNull;
 
 @Entity
+@JsonIgnoreProperties({"id", "passphrase"})
 public class Word {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "word_id", nullable = false, updatable = false)
-  private long id;
+  private Long id;
 
   @Column(nullable = false, updatable = false)
   private String word;
@@ -30,7 +32,7 @@ public class Word {
   @OnDelete(action = OnDeleteAction.CASCADE)
   private Passphrase passphrase;
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
